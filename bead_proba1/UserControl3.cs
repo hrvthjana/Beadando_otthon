@@ -29,7 +29,7 @@ namespace bead_proba1
             pDiag.Controls.Clear();
             PlotView view = new PlotView();
             view.Dock = DockStyle.Fill;
-           var model = new PlotModel();
+            var model = new PlotModel();
             view.Width = pDiag.Width;
             view.Height = pDiag.Height;
             if (radioState.Checked == true)
@@ -40,7 +40,7 @@ namespace bead_proba1
                                    join cd in context.CustomerDetails on oc.CustomerId equals cd.CustomerId
                                    join ca in context.CustomerAddresses on cd.PostalCode equals ca.PostalCode
                                    group x by ca.State into stateGroup
-                                   select new DiagramClass
+                                   select new
                                    {
                                        State = stateGroup.Key,
                                        Total = (double)stateGroup.Sum(op => op.Sales)
@@ -56,13 +56,13 @@ namespace bead_proba1
                 }
                 model.Series.Add(bari);
             }
-            else
+            else if (radioCategory.Checked == true)
             {
-                model.Title = "TotalOrder - SubCategory" ;
-                var diagramquery = from x in context.OrderProducts
+                model.Title = "TotalOrder - SubCategory";
+                var diagramQuery = from x in context.OrderProducts
                                    join p in context.Products on x.ProductId equals p.ProductId
                                    group x by p.SubCategory into categoryGroup
-                                   select new DiagramClass2
+                                   select new
                                    {
                                        SubCategory = categoryGroup.Key,
                                        Total = (double)categoryGroup.Sum(op => op.Sales)
@@ -71,10 +71,60 @@ namespace bead_proba1
                 var bari = new BarSeries();
                 var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
                 model.Axes.Add(categoryAxis);
-                foreach (var item in diagramquery)
+                foreach (var item in diagramQuery)
                 {
                     bari.Items.Add(new BarItem { Value = item.Total });
                     categoryAxis.Labels.Add(item.SubCategory);
+                }
+                model.Series.Add(bari);
+
+            }
+            else if (radioYear.Checked == true)
+            {
+                model.Title = "TotalOrder - Year";
+                var diagramQuery = from x in context.OrderProducts
+                                   join oc in context.OrderCustomers on x.OrderId equals oc.OrderId
+                                   join od in context.OrderDetails on oc.OrderId equals od.OrderId
+                                   group x by od.OrderDate.Year into dateGroup
+                                   orderby dateGroup.Key
+                                   select new
+                                   {
+                                       Date = dateGroup.Key,
+                                       Total = (double)dateGroup.Sum(op => op.Sales)
+                                   };
+
+                var bari = new BarSeries();
+                var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
+                model.Axes.Add(categoryAxis);
+                foreach (var item in diagramQuery)
+                {
+                    bari.Items.Add(new BarItem { Value = item.Total });
+                    categoryAxis.Labels.Add((item.Date).ToString());
+                }
+                model.Series.Add(bari);
+            }
+            else
+            {
+                model.Title = "TotalSales - Segment";
+                var diagramQuery = from x in context.OrderProducts
+                                   join oc in context.OrderCustomers on x.OrderId equals oc.OrderId
+                                   
+                                   join cd in context.CustomerDetails on oc.CustomerId equals cd.CustomerId
+                                   group x by cd.Segment into segGrop
+                                   select new
+                                   {
+                                   
+                                       Segment = segGrop.Key,
+                                       Total = (double)segGrop.Sum(op => op.Sales)
+                                   };
+
+                var bari = new BarSeries();
+                var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
+                model.Axes.Add(categoryAxis);
+                foreach (var item in diagramQuery)
+                {
+                    bari.Items.Add(new BarItem { Value = item.Total });
+                     categoryAxis.Labels.Add(item.Segment);
                 }
                 model.Series.Add(bari);
 
@@ -87,17 +137,6 @@ namespace bead_proba1
         }
     }
 
-    public class DiagramClass
-    {
-        public string State { get; set; }
 
-        public double Total { get; set; }
-    }
-    public class DiagramClass2
-    {
-        public string SubCategory { get; set; }
-
-        public double Total { get; set; }
-    }
 
 }

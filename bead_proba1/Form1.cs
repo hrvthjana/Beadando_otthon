@@ -9,7 +9,7 @@ namespace bead_proba1
         
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Az alkotás minden részletét gondosan terveztem és kidolgoztam, hogy a felhasználók számára kényelmes és értékes élményt nyújtsak. Csalódást okoz, amikor az emberek gyorsan zárják be az alkalmazást, mert úgy érzem, mintha nem értékelnék az általam beletett rengeteg idõt, energiát és odafigyelést. Emiatt felmerül bennem a csalódottság érzése, mert vártam, hogy az alkotásom jobban értékelve legyen, és hogy a felhasználók fedezzék fel azt az apró részleteket, melyekre annyit áldoztam. Ennek ellenére igyekszem fókuszálni az alkotás örömére és azon pozitív visszajelzésekre, amelyeket azoktól kapok, akik értékelik a munkám.", "Kilépés az alkalmazásból", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show("Biztonsan ki akar lépni?", "Kilépés az alkalmazásból", MessageBoxButtons.YesNo) != DialogResult.Yes)
             {
                 e.Cancel = true;
             }

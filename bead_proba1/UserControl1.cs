@@ -94,22 +94,6 @@ namespace bead_proba1
             txtTotal.Text = total.ToString();
 
         }
-
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDel_Click(object sender, EventArgs e)
-        {
-            var OrderToDel = (OrderDetail)lbOrders.SelectedItem;
-
-        }
     }
     public class Sajatom
     {

@@ -32,6 +32,8 @@
             btnGenerate = new Button();
             radioState = new RadioButton();
             radioCategory = new RadioButton();
+            radioYear = new RadioButton();
+            radioButton1 = new RadioButton();
             SuspendLayout();
             // 
             // pDiag
@@ -59,7 +61,7 @@
             radioState.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             radioState.AutoSize = true;
             radioState.Checked = true;
-            radioState.Location = new Point(1129, 100);
+            radioState.Location = new Point(1129, 89);
             radioState.Name = "radioState";
             radioState.Size = new Size(98, 36);
             radioState.TabIndex = 2;
@@ -71,18 +73,44 @@
             // 
             radioCategory.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             radioCategory.AutoSize = true;
-            radioCategory.Location = new Point(1129, 152);
+            radioCategory.Location = new Point(1129, 177);
             radioCategory.Name = "radioCategory";
             radioCategory.Size = new Size(155, 36);
             radioCategory.TabIndex = 3;
             radioCategory.Text = "Catgegory";
             radioCategory.UseVisualStyleBackColor = true;
             // 
+            // radioYear
+            // 
+            radioYear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioYear.AutoSize = true;
+            radioYear.Location = new Point(1129, 131);
+            radioYear.Name = "radioYear";
+            radioYear.Size = new Size(89, 36);
+            radioYear.TabIndex = 4;
+            radioYear.TabStop = true;
+            radioYear.Text = "Year";
+            radioYear.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(1129, 219);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(141, 36);
+            radioButton1.TabIndex = 5;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Segment";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
             // UserControl3
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
+            Controls.Add(radioButton1);
+            Controls.Add(radioYear);
             Controls.Add(radioCategory);
             Controls.Add(radioState);
             Controls.Add(btnGenerate);
@@ -99,5 +127,7 @@
         private Button btnGenerate;
         private RadioButton radioState;
         private RadioButton radioCategory;
+        private RadioButton radioYear;
+        private RadioButton radioButton1;
     }
 }

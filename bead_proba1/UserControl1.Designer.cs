@@ -194,7 +194,7 @@
             Controls.Add(lbCustomer);
             Name = "UserControl1";
             Size = new Size(1385, 757);
-            Load += UserControl1_Load;
+            //Load += UserControl1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)sajatomBindingSource).EndInit();
             ResumeLayout(false);
